@@ -61,7 +61,7 @@ t_stack	*ft_lstnew(int content)
 	if (a == 0)
 		return (0);
 	a->content = content;
-	a->true = 1;
+	a->true = 0;
 	a->next = NULL;
 	return (a);
 }

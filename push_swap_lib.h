@@ -13,6 +13,13 @@ typedef struct s_stack
 	struct s_stack	*next;
 }	t_stack;
 
+typedef struct s_content
+{
+	int	the_first;
+	int	the_second;
+}	t_content;
+
+
 t_stack	*ft_lstnew(int content);
 int		ft_atoi(const char *str);
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
