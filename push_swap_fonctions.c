@@ -128,6 +128,8 @@ void	swap(t_stack **a_head, t_stack **b_head, int swap)
 		tm2 = (*b_head)->next;
 		(*b_head)->next = NULL;
 		*b_head = tm2;
+		if (swap == 7)
+		printf ("rb\n");
 	}
 	if (checker(swap, a_head, b_head) && (swap == 9 || swap == 11))
 	{

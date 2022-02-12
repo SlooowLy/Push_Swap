@@ -227,7 +227,9 @@ void	push_to_b(t_stack **a_head, t_stack **b_head)
 		if ((*a_head)->true == 0)
 			swap(a_head, b_head, 5);
 		else
+		{
 			swap(a_head, b_head, 6);
+		}
 	}
 }
 
@@ -265,27 +267,152 @@ int	get_min(t_stack	*a_head)
 	return (tmp);
 }
 
-void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head)
+// void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head)
+// {
+// 	int	i;
+// 	int	b;
+
+// 	i = 0;
+// 	while (*b_head)
+// 	{
+// 		b = (*b_head)->content;
+// 		if ((*a_head)->content > b && check_last_content(*a_head, b))
+// 		{
+// 			swap(a_head, b_head, 4);
+// 		}
+// 		else if (check_all_content(*a_head, b) && (*a_head)->content == get_min(*a_head))
+// 		{
+// 			swap(a_head, b_head, 4);
+// 		}
+// 		else
+// 		{
+// 			swap(a_head, b_head, 6);
+// 		}
+// 	}
+// }
+
+int	check_first_last(t_stack *a_head, int b)
+{
+	int		i;
+	t_stack	*tmp;
+
+	tmp = a_head;
+	i = 0;
+	while (tmp->next)
+		tmp = tmp->next;
+	if (a_head->content > b && tmp->content < b)
+		return (1);
+	return (1);
+}
+
+int	len(t_stack *head)
 {
 	int	i;
-	int	b;
 
 	i = 0;
+	while (head)
+	{
+		head = head->next;
+		i++;
+	}
+	return (i);
+}
+
+int	compaire_to_all(t_stack *head, int b)
+{
+	while (head)
+	{
+		if (head->content < b)
+			return (0);
+		head = head->next;
+	}
+	return (1);
+}
+
+t_stack	*whos_first(t_stack *a_head, t_stack *b_head)
+{
+	int		i;
+	int		k;
+	int		b;
+	int		t;
+	int		r;
+	t_stack	*first;
+	t_stack *tmp;
+
+	k = 0;
+	r = 0;
+	while (b_head)
+	{
+		tmp = a_head;
+		b = b_head->content;
+		i = 0;
+		while (tmp)
+		{
+			if (tmp == a_head && check_first_last(a_head, b))
+				break;
+			if (tmp != a_head)
+			{
+				if (t < b && b < tmp->content)
+				{
+					break;
+				}
+			}
+			t = tmp->content;
+			i++;
+			tmp = tmp->next;
+		}
+		if (i > len(a_head))
+			i = len(a_head) - i;
+		if (k > len(b_head))
+			k = len(b_head) - k;
+		if (r > i + k || !r)
+		{
+			first = b_head;
+			r = i + k;
+		}
+		k++;
+		b_head = b_head->next;
+	}
+	return (first);
+}
+
+int	get_max(t_stack *a_head)
+{
+	int	i;
+
+	i = a_head->content;
+	while (a_head)
+	{
+		if (i < a_head->content)
+			i = a_head->content;
+		a_head = a_head->next;
+	}
+	return (i);
+}
+
+void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head)
+{
+	int		i;
+	t_stack	*first;
+
 	while (*b_head)
 	{
-		b = (*b_head)->content;
-		if ((*a_head)->content > b && check_last_content(*a_head, b))
+		first = *b_head;
+		if ((*b_head)->next)
+			first = whos_first(*a_head, *b_head);
+		while (*b_head != first)
+			swap(a_head, b_head, 7);
+		while (!check_first_last(*a_head, (*b_head)->content))
 		{
-			swap(a_head, b_head, 4);
-		}
-		else if (check_all_content(*a_head, b) && (*a_head)->content == get_min(*a_head))
-		{
-			swap(a_head, b_head, 4);
-		}
-		else
-		{
+			if (get_max(*a_head) == (*b_head)->content || get_min(*a_head) == (*b_head)->content)
+			{
+				i = get_min(*a_head);
+				while ((*a_head)->content != i)
+					swap(a_head, b_head, 6);
+			}
 			swap(a_head, b_head, 6);
 		}
+		swap(a_head, b_head, 4);
 	}
 }
 
@@ -312,10 +439,12 @@ int	main(int ac, char **av)
 	mark(&a_head, mark_head);
 	push_to_b(&a_head, &b_head);
 	sort_from_b_to_a(&a_head, &b_head);
-	while (!how_is_it(a_head, b_head, 1))
-		swap(&a_head, &b_head, 6);
-	// printf ("a ");
-	// print_the_stack(a_head);
+	// while (!how_is_it(a_head, b_head, 1))
+	// {
+	// 	swap(&a_head, &b_head, 6);
+	// }
+	printf ("a ");
+	print_the_stack(a_head);
 	// printf ("\nb ");
 	// print_the_stack(b_head);
 	return (0);
