@@ -138,7 +138,7 @@ t_stack	*get_mark_head(t_stack **a_head)
 	while (*a_head)
 	{
 		k = will_stay(head, *a_head);
-		if (k > i)
+		if (k > i || (k == i && mark_head->content < (*a_head)->content))
 		{
 			i = k;
 			mark_head = *a_head;
@@ -267,30 +267,6 @@ int	get_min(t_stack	*a_head)
 	return (tmp);
 }
 
-// void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head)
-// {
-// 	int	i;
-// 	int	b;
-
-// 	i = 0;
-// 	while (*b_head)
-// 	{
-// 		b = (*b_head)->content;
-// 		if ((*a_head)->content > b && check_last_content(*a_head, b))
-// 		{
-// 			swap(a_head, b_head, 4);
-// 		}
-// 		else if (check_all_content(*a_head, b) && (*a_head)->content == get_min(*a_head))
-// 		{
-// 			swap(a_head, b_head, 4);
-// 		}
-// 		else
-// 		{
-// 			swap(a_head, b_head, 6);
-// 		}
-// 	}
-// }
-
 int	check_first_last(t_stack *a_head, int b)
 {
 	int		i;
@@ -302,7 +278,7 @@ int	check_first_last(t_stack *a_head, int b)
 		tmp = tmp->next;
 	if (a_head->content > b && tmp->content < b)
 		return (1);
-	return (1);
+	return (0);
 }
 
 int	len(t_stack *head)
@@ -404,16 +380,35 @@ void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head)
 			swap(a_head, b_head, 7);
 		while (!check_first_last(*a_head, (*b_head)->content))
 		{
-			if (get_max(*a_head) == (*b_head)->content || get_min(*a_head) == (*b_head)->content)
+			if (get_max(*a_head) < (*b_head)->content || get_min(*a_head) > (*b_head)->content)
 			{
 				i = get_min(*a_head);
 				while ((*a_head)->content != i)
 					swap(a_head, b_head, 6);
+				break;
 			}
-			swap(a_head, b_head, 6);
+			else
+			{
+				swap(a_head, b_head, 6);
+			}
 		}
 		swap(a_head, b_head, 4);
 	}
+}
+
+int	get_min_place(t_stack *a_head)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = get_min(a_head);
+	while (k != a_head->content)
+	{
+		i++;
+		a_head = a_head->next;
+	}
+	return (i);
 }
 
 int	main(int ac, char **av)
@@ -436,15 +431,21 @@ int	main(int ac, char **av)
 		i++;
 	}
 	mark_head = get_mark_head(&a_head);
+	printf("%d\n", mark_head->content);
 	mark(&a_head, mark_head);
 	push_to_b(&a_head, &b_head);
 	sort_from_b_to_a(&a_head, &b_head);
-	// while (!how_is_it(a_head, b_head, 1))
-	// {
-	// 	swap(&a_head, &b_head, 6);
-	// }
-	printf ("a ");
-	print_the_stack(a_head);
+	i = get_min_place(a_head);
+	k = len(a_head);
+	while (!how_is_it(a_head, b_head, 1))
+	{
+		if (i < k / 2)
+			swap(&a_head, &b_head, 6);
+		else
+			swap(&a_head, &b_head, 9);
+	}
+	// printf ("a ");
+	// print_the_stack(a_head);
 	// printf ("\nb ");
 	// print_the_stack(b_head);
 	return (0);
