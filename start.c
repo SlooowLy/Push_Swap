@@ -127,17 +127,15 @@ t_stack	*get_mark_head(t_stack **a_head)
 {
 	t_stack	*head;
 	t_stack	*mark_head;
-	t_stack	*mark_head_2;
 	int		i;
-	int		i2;
 	int		k;
 
 	i = 0;
-	i2 = 0;
 	head = *a_head;
 	while (*a_head)
 	{
 		k = will_stay(head, *a_head);
+		// printf ("%d\n", k);
 		if (k > i || (k == i && mark_head->content < (*a_head)->content))
 		{
 			i = k;
@@ -146,66 +144,52 @@ t_stack	*get_mark_head(t_stack **a_head)
 		*a_head = (*a_head)->next;
 	}
 	*a_head = head;
-	swap(a_head, NULL, 1);
-	head = *a_head;
+	return (mark_head);
+}
+
+void	mark_2(t_stack **a_head, t_stack **b_head, t_stack *head)
+{
+	t_stack	*tmp;
+	t_stack	*first_tmp;
+
+	first_tmp = *a_head;
+	tmp = (*a_head)->next;
+	*a_head = (*a_head)->next->next;
 	while (*a_head)
 	{
-		k = will_stay(head, *a_head);
-		if (k > i2)
+		if (!(*a_head)->true && (*a_head)->content < first_tmp->content && tmp->true)
 		{
-			i2 = k;
-			mark_head_2 = *a_head;
+			(*a_head)->true = 1;
+			first_tmp = *a_head;
+		}
+		else
+			tmp = *a_head;
+		*a_head = (*a_head)->next;
+	}
+}
+
+void	mark(t_stack **a_head, t_stack **b_head, t_stack *mark_head)
+{
+	t_stack	*tmp;
+	t_stack	*head;
+
+	while (*a_head != mark_head)
+		swap(a_head, NULL, 9);
+	(*a_head)->true = 1;
+	tmp = *a_head;
+	*a_head = (*a_head)->next;
+	while (*a_head)
+	{
+		if ((*a_head)->content > tmp->content)
+		{
+			(*a_head)->true = 1;
+			tmp = *a_head;
 		}
 		*a_head = (*a_head)->next;
 	}
-	*a_head = head;
-	if (i > i2)
-	{
-		swap(a_head, NULL, 1);
-		return (mark_head);
-	}
-	return (mark_head_2);
-}
-
-void	mark(t_stack **a_head, t_stack	*mark_head)
-{
-	t_stack	*head;
-	int		tmp;
-	int		i;
-
-	i = 0;
-	head = *a_head;
-	while (head != mark_head)
-	{
-		head = head->next;
-		i++;
-	}
-	tmp = mark_head->content;
-	head->true = 1;
-	head = head->next;
-	while (head)
-	{
-		if (head->content > tmp)
-		{
-			head->true = 1;
-			tmp = head->content;
-		}
-		head = head->next;
-	}
-	head = *a_head;
-	if (*a_head != mark_head)
-	{
-		while (i)
-		{
-			if (head->content > tmp)
-			{
-				head->true = 1;
-				tmp = head->content;
-			}
-			head = head->next;
-			i--;
-		}
-	}
+	*a_head = mark_head;
+	mark_2(a_head, b_head, mark_head);
+	*a_head = mark_head;
 }
 
 int	check_push_b(t_stack *a_head)
@@ -309,6 +293,7 @@ t_stack	*whos_first(t_stack *a_head, t_stack *b_head)
 {
 	int		i;
 	int		k;
+	int		k1;
 	int		b;
 	int		t;
 	int		r;
@@ -366,9 +351,54 @@ int	get_max(t_stack *a_head)
 	return (i);
 }
 
+t_op	get_op(t_stack *a_head, t_stack *b_head, t_stack *first)
+{
+	t_op	op;
+	t_stack	*tmp;
+
+	tmp = b_head;
+	op.a = 0;
+	op.b = 0;
+	while (tmp != first)
+	{
+		tmp = tmp->next;
+		op.b++;
+	}
+	tmp = a_head;
+	while (!check_first_last(tmp, first->content))
+	{
+		tmp = tmp->next;
+		op.a++;
+	}
+	if (op.b == 0 && op.a == 0)
+	{
+		op.oa = 0;
+		op.ob = 0;
+		return (op);
+	}
+	if (op.b > len(b_head) / 2)
+		op.b = len(b_head) - op.b + 1;
+	else
+		op.b *= -1;
+	if (op.a > len(a_head) / 2)
+		op.a = len(a_head) - op.a + 1;
+	else
+		op.a *= -1;
+	if (op.a > 0)
+		op.oa = 1;
+	if (op.a < 0)
+		op.oa = 2;
+	if (op.b > 0)
+		op.ob = 1;
+	if (op.b < 0)
+		op.ob = 2;
+	return (op);
+}
+
 void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head)
 {
 	int		i;
+	// t_op	op;
 	t_stack	*first;
 
 	while (*b_head)
@@ -376,6 +406,7 @@ void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head)
 		first = *b_head;
 		if ((*b_head)->next)
 			first = whos_first(*a_head, *b_head);
+		// op = get_op(*a_head, *b_head, first)
 		while (*b_head != first)
 			swap(a_head, b_head, 7);
 		while (!check_first_last(*a_head, (*b_head)->content))
@@ -411,14 +442,82 @@ int	get_min_place(t_stack *a_head)
 	return (i);
 }
 
+int	check_sort(t_stack *a_head)
+{
+	t_stack	*tmp;
+	t_stack	*head;
+
+	head = a_head;
+	while (a_head)
+	{
+		if (a_head->next)
+		{
+			if (a_head->content > a_head->next->content && a_head->next->content != get_min(a_head))
+				return (0);
+		}
+		else
+		{
+			tmp = head;
+			if (a_head->content > tmp->content && tmp->content != get_min(a_head))
+				return (0);
+		}
+		a_head = a_head->next;
+	}
+	return (1);
+}
+
+void	swap_to_head_sa(t_stack **a_head, t_stack *tmp)
+{
+	if ((*a_head)->next)
+	{
+		if (*a_head != tmp)
+		{
+			while (*a_head != tmp)
+				swap(a_head, NULL, 6);
+		}
+	}
+	else
+		swap(a_head, NULL, 9);
+	swap(a_head, NULL, 1);
+}
+
+void	sort_in_a(t_stack **a_head, t_stack *mark_head)
+{
+	t_stack	*min;
+	t_stack	*tmp;
+	t_stack	*head;
+
+	mark_head->true = 1;
+	(*a_head)->true = 1;
+	head = *a_head;
+	tmp = *a_head;
+	*a_head = (*a_head)->next;
+	while ((*a_head)->content != mark_head->content)
+	{
+		if ((*a_head)->content < tmp->content)
+		{
+			*a_head = head;
+			while (*a_head != tmp)
+				swap (a_head, NULL, 6);
+			swap (a_head, NULL, 1);
+			head = *a_head;
+		}
+		tmp = *a_head;
+		*a_head = (*a_head)->next;
+	}
+	*a_head = head;
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a_head;
 	t_stack	*b_head;
+	t_stack	*tmp;
 	t_stack	*mark_head;
 	int	i;
 	int	sw;
 	int	k;
+	int	min;
 
 	i = 1;
 	sw = 1;
@@ -431,9 +530,12 @@ int	main(int ac, char **av)
 		i++;
 	}
 	mark_head = get_mark_head(&a_head);
-	printf("%d\n", mark_head->content);
-	mark(&a_head, mark_head);
+	// printf ("%d\n", mark_head->content);
+	mark(&a_head, &b_head, mark_head);
+	// printf ("%d\n", i);
+	min = get_min(a_head);
 	push_to_b(&a_head, &b_head);
+	// sort_in_a(&a_head, mark_head);
 	sort_from_b_to_a(&a_head, &b_head);
 	i = get_min_place(a_head);
 	k = len(a_head);

@@ -12,11 +12,13 @@ typedef struct s_stack
 	struct s_stack	*next;
 }	t_stack;
 
-typedef struct s_content
+typedef struct s_op
 {
-	int	the_first;
-	int	the_second;
-}	t_content;
+	int	a;
+	int	b;
+	int	oa;
+	int	ob;
+}	t_op;
 
 
 t_stack	*ft_lstnew(int content);

@@ -59,6 +59,8 @@ void	swap(t_stack **a_head, t_stack **b_head, int swap)
 		tm->content = temp;
 		if (swap == 1)
 			printf ("sa\n");
+		if (swap == 3)
+			printf ("ss\n");
 	}
 	if (checker(swap, a_head, b_head) &&(swap == 2 || swap == 3))
 	{
