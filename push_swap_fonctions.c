@@ -131,7 +131,9 @@ void	swap(t_stack **a_head, t_stack **b_head, int swap)
 		(*b_head)->next = NULL;
 		*b_head = tm2;
 		if (swap == 7)
-		printf ("rb\n");
+			printf ("rb\n");
+		if (swap == 8)
+			printf ("rr\n");
 	}
 	if (checker(swap, a_head, b_head) && (swap == 9 || swap == 11))
 	{
@@ -145,7 +147,8 @@ void	swap(t_stack **a_head, t_stack **b_head, int swap)
 		tm->next = *a_head;
 		*a_head = tm;
 		tm2->next = NULL;
-		printf ("rra\n");
+		if (swap == 9)
+			printf ("rra\n");
 	}
 	if (checker(swap, a_head, b_head) && (swap == 10 || swap == 11))
 	{
@@ -161,5 +164,7 @@ void	swap(t_stack **a_head, t_stack **b_head, int swap)
 		tm2->next = NULL;
 		if (swap == 10)
 			printf ("rrb\n");
+		if (swap == 11)
+			printf ("rrr\n");
 	}
 }

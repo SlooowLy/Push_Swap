@@ -18,6 +18,7 @@ typedef struct s_op
 	int	b;
 	int	oa;
 	int	ob;
+	int	i;
 }	t_op;
 
 
