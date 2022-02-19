@@ -24,7 +24,7 @@ void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head, int min)
 		first = *b_head;
 		if ((*b_head)->next)
 			first = whos_first(*a_head, *b_head, &op, min);
-		swap_b_a(a_head, b_head, first, &op, min);
+		swap_b_a(a_head, b_head, first, &op);
 	}
 }
 

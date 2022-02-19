@@ -25,7 +25,7 @@ typedef struct s_op
 typedef struct s_25_line
 {
 	int		min;
-	t_op	*op;
+	t_op	op;
 }	t_25_line;
 
 t_stack	*ft_lstnew(int content);
@@ -60,8 +60,8 @@ int	get_min_place(t_stack *a_head);
 void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head, int min);
 // t_stack	*whos_first(t_stack *a_head, t_stack *b_head, t_op *op, int min);
 t_stack	*whos_first(t_stack *a_head, t_stack *b_head, t_op *op, int min);
-// void	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_25_line *t);
-void	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op, int min);
+void	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op);
+// void	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op, int min);
 int	check_b_a(t_stack *a_head, t_stack *b_head, t_stack *first, int min);
 int	check_1_2(t_op *op, int i, t_stack *a_head, t_stack *b_head);
 int	check_b(t_stack *b_head, t_stack *first);

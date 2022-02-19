@@ -1,9 +1,23 @@
 #include "push_swap_lib.h"
 
-void	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op, int min)
+int	get_min_2(t_stack *a_head, t_stack *b_head)
+{
+	int	j;
+	int	k;
+
+	j = get_min(a_head);
+	k = get_min(b_head);
+	if (j < k)
+		return (j);
+	return (k);
+}
+
+void	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op)
 {
 	int	i;
+	int	min;
 
+	min = get_min_2(*a_head, *b_head);
 	if (!check_b_a(*a_head, *b_head, first, min))
 	{
 		if (op->oa == 0 && op->ob == 1)
