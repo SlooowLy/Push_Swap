@@ -28,6 +28,16 @@ typedef struct s_25_line
 	t_op	op;
 }	t_25_line;
 
+typedef struct s_25_line_2
+{
+	int		k;
+	int		b;
+	int		t;
+	int		r;
+	int		lenb;
+	int		lena;
+}	t_25_line_2;
+
 t_stack	*ft_lstnew(int content);
 int		ft_atoi(const char *str);
 int		checker(int swap, t_stack **a_head, t_stack **b_head);
@@ -44,10 +54,12 @@ void	swap_6(t_stack **a_head, t_stack **b_head, int swap);
 void	swap_2(t_stack **a_head, t_stack **b_head, int swap);
 void	mark(t_stack **a_head, t_stack **b_head, t_stack *mark_head);
 t_stack	*get_mark_head(t_stack **a_head);
+int	get_i_1(t_op *op, int lena, int lenb, int i);
 int	how_is_it(t_stack *a_head);
 void	creat(t_stack **a_head, t_stack **b_head, char **av, int ac);
 void last_swap(t_stack **a_head);
 int	len(t_stack *head);
+int	get_i_2(t_op *op, int lena, int lenb, int i);
 int	check_first_last(t_stack *a_head, int b);
 int	get_min(t_stack	*a_head);
 void	push_to_b(t_stack **a_head, t_stack **b_head);
@@ -58,12 +70,16 @@ void	get_op(int	lena, int lenb, t_op *op);
 int	check_a(t_stack *a_head, t_stack *first, int min);
 int	get_min_place(t_stack *a_head);
 void	sort_from_b_to_a(t_stack **a_head, t_stack **b_head, int min);
-// t_stack	*whos_first(t_stack *a_head, t_stack *b_head, t_op *op, int min);
 t_stack	*whos_first(t_stack *a_head, t_stack *b_head, t_op *op, int min);
 void	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op);
-// void	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op, int min);
 int	check_b_a(t_stack *a_head, t_stack *b_head, t_stack *first, int min);
 int	check_1_2(t_op *op, int i, t_stack *a_head, t_stack *b_head);
 int	check_b(t_stack *b_head, t_stack *first);
+int	get_min_2(t_stack *a_head, t_stack *b_head);
+void	swap_b_a_1(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op);
+void	swap_i_3(t_stack **a_head, t_stack **b_head, t_stack *first, int min);
+void	swap_i_4(t_stack **a_head, t_stack **b_head, t_stack *first, int min);
+void	swap_b_a_2(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op);
+
 
 # endif
