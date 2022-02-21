@@ -81,6 +81,33 @@ t_stack	*get_mark_head(t_stack **a_head)
 	return (mark_head);
 }
 
+void	mark_2(t_stack **a_head)
+{
+	t_stack	*mark_head;
+	t_stack	*a;
+	t_stack	*tmp;
+	t_stack	*first_tmp;
+
+	mark_head = *a_head;
+	tmp = (*a_head)->next;
+	first_tmp = *a_head;
+	*a_head = (*a_head)->next->next;
+	while (*a_head)
+	{
+		if (!(*a_head)->true && (*a_head)->content > first_tmp->content && tmp->true && first_tmp->true)
+		{
+			(*a_head)->true = 1;
+			first_tmp = *a_head;
+		}
+		else
+		{
+			first_tmp = tmp;
+			tmp = *a_head;
+		}
+		*a_head = (*a_head)->next;
+	}
+}
+
 void	mark(t_stack **a_head, t_stack **b_head, t_stack *mark_head)
 {
 	t_stack	*tmp;
@@ -101,5 +128,6 @@ void	mark(t_stack **a_head, t_stack **b_head, t_stack *mark_head)
 		*a_head = (*a_head)->next;
 	}
 	*a_head = mark_head;
+	mark_2(a_head);
 	*a_head = mark_head;
 }

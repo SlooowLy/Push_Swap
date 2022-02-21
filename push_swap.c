@@ -12,15 +12,15 @@
 
 #include "push_swap_lib.h"
 
-// void	print_the_stack(t_stack *stack)
-// {
-// 	printf ("%d ", stack->content);
-// 	while (stack->next)
-// 	{
-// 		stack = stack->next;
-// 		printf ("%d ", stack->content);
-// 	}
-// }
+void	print_the_stack(t_stack *stack)
+{
+	printf ("%d ", stack->content);
+	while (stack->next)
+	{
+		stack = stack->next;
+		printf ("%d ", stack->content);
+	}
+}
 
 int	get_i_3(t_op *op, int lena, int lenb, int i)
 {
@@ -126,6 +126,32 @@ t_stack	*whos_first(t_stack *a_head, t_stack *b_head, t_op *op, int min)
 	return (first);
 }
 
+void	sort_in_a(t_stack **a_head)
+{
+	t_stack	*tmp;
+	t_stack	*head;
+	t_stack	*first_head;
+
+	head = *a_head;
+	first_head = *a_head;
+	tmp = *a_head;
+	*a_head = (*a_head)->next;
+	while (*a_head && *a_head != first_head)
+	{
+		if ((*a_head)->content < tmp->content)
+		{
+			*a_head = head;
+			while (*a_head != tmp)
+				swap(a_head, NULL, 6);
+			swap(a_head, NULL, 1);
+			head = *a_head;
+		}
+		tmp = *a_head;
+		*a_head = (*a_head)->next;
+	}
+	*a_head = head;
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a_head;
@@ -138,7 +164,10 @@ int	main(int ac, char **av)
 	mark(&a_head, &b_head, mark_head);
 	i = get_min(a_head);
 	push_to_b(&a_head, &b_head);
+	sort_in_a(&a_head);
 	sort_from_b_to_a(&a_head, &b_head, i);
 	last_swap(&a_head);
+	// printf ("a ");
+	// print_the_stack(a_head);
 	return (0);
 }

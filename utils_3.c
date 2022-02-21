@@ -32,7 +32,11 @@ void	get_op(int lena, int lenb, t_op *op)
 int	will_stay(t_stack *a_head, t_stack *head, int i, int tmp)
 {
 	t_stack	*temp;
+	double	first;
+	int		k;
 
+	k = 0;
+	first = 10000000;
 	temp = head;
 	tmp = temp->content;
 	temp = temp->next;
@@ -40,9 +44,19 @@ int	will_stay(t_stack *a_head, t_stack *head, int i, int tmp)
 	{
 		if (temp->content > tmp)
 		{
+			k = 1;
 			i++;
+			first = tmp;
 			tmp = temp->content;
 		}
+		else if (i && first < temp->content)
+		{
+			k = 1;
+			i++;
+			first = temp->content;
+		}
+		else
+			k = 0;
 		temp = temp->next;
 	}
 	while (head != a_head)
@@ -56,7 +70,6 @@ int	will_stay(t_stack *a_head, t_stack *head, int i, int tmp)
 	}
 	return (i);
 }
-
 int	get_max(t_stack *a_head)
 {
 	int	i;
