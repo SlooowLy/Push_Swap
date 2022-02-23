@@ -18,13 +18,13 @@ void	get_op(int lena, int lenb, t_op *op)
 		op->ob = 0;
 	if (op->a == 0)
 		op->oa = 0;
-	if (op->b >= lenb / 2)
+	if (op->b >= (lenb / 2 ))
 		op->ob = 1;
-	else
+	else if (op->b < (lenb / 2 ))
 		op->ob = 2;
-	if (op->a >= lena / 2)
+	if (op->a >= (lena / 2))
 		op->oa = 1;
-	else
+	else if (op->a <= (lena / 2))
 		op->oa = 2;
 	op->o = 0;
 }

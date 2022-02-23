@@ -23,17 +23,17 @@ int	check_push_b(t_stack *a_head)
 	return (0);
 }
 
-void	push_to_b(t_stack **a_head, t_stack **b_head)
+void	push_to_b(t_stack **a_head, t_stack **b_head, t_stack *mark_head)
 {
 	while (check_push_b(*a_head))
 	{
 		if ((*a_head)->true == 0)
-		{
 			swap(a_head, b_head, 5);
-		}
 		else
 			swap(a_head, b_head, 6);
 	}
+	while (*a_head != mark_head)
+		swap (a_head, NULL, 6);
 }
 
 int	get_min(t_stack	*a_head)

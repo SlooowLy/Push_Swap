@@ -62,7 +62,7 @@ int	len(t_stack *head);
 int	get_i_2(t_op *op, int lena, int lenb, int i);
 int	check_first_last(t_stack *a_head, int b);
 int	get_min(t_stack	*a_head);
-void	push_to_b(t_stack **a_head, t_stack **b_head);
+void	push_to_b(t_stack **a_head, t_stack **b_head, t_stack *mark_head);
 int	check_push_b(t_stack *a_head);
 int	get_max(t_stack *a_head);
 int	will_stay(t_stack *a_head, t_stack *head, int i, int tmp);

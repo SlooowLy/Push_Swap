@@ -126,25 +126,78 @@ t_stack	*whos_first(t_stack *a_head, t_stack *b_head, t_op *op, int min)
 	return (first);
 }
 
-void	sort_in_a(t_stack **a_head)
+int	how_is_it_2(t_stack *mark_head, t_stack *a_haed)
+{
+	t_stack *tmp_first;
+	t_stack *tmp;
+	int		i;
+
+	i = 0;
+	tmp_first = mark_head;
+	tmp = a_haed;
+	if (mark_head->next)
+		tmp = tmp_first->next;
+	if (a_haed != mark_head)
+		i = 1;
+	while (tmp != mark_head && tmp)
+	{
+		if (tmp->content < tmp_first->content)
+			return (0);
+		tmp_first = tmp_first->next;
+		tmp = tmp->next;
+		if (i && tmp)
+			tmp = a_haed;
+		if (i && !tmp_first)
+			tmp_first = a_haed;
+	}
+	return (1);
+}
+
+int	get_swap(t_stack *head, t_stack *tmp)
+{
+	int	i;
+	int	k;
+
+	i = len (head);
+	k = 0;
+	while (head != tmp)
+	{
+		k++;
+		head = head->next;
+	}
+	if (k < i / 2 + 1)
+		return (1);
+	return (0);
+}
+
+void	sort_in_a(t_stack **a_head, t_stack *mark_head)
 {
 	t_stack	*tmp;
 	t_stack	*head;
 	t_stack	*first_head;
+	int		i;
+	int		ln;
 
 	head = *a_head;
-	first_head = *a_head;
 	tmp = *a_head;
 	*a_head = (*a_head)->next;
-	while (*a_head && *a_head != first_head)
+	ln = len(tmp);
+	while (*a_head != mark_head && *a_head)
 	{
-		if ((*a_head)->content < tmp->content)
+		if ((*a_head)->content < tmp->content && (*a_head)->content != mark_head->content)
 		{
+			i = get_swap(head, tmp);
 			*a_head = head;
 			while (*a_head != tmp)
-				swap(a_head, NULL, 6);
+			{
+				if (i)
+					swap(a_head, NULL, 6);
+				else
+					swap(a_head, NULL, 9);
+			}
 			swap(a_head, NULL, 1);
 			head = *a_head;
+			*a_head = (*a_head)->next;
 		}
 		tmp = *a_head;
 		*a_head = (*a_head)->next;
@@ -161,10 +214,12 @@ int	main(int ac, char **av)
 
 	creat(&a_head, &b_head, av, ac);
 	mark_head = get_mark_head(&a_head);
+	// printf ("%d\n", mark_head->content);
 	mark(&a_head, &b_head, mark_head);
 	i = get_min(a_head);
-	push_to_b(&a_head, &b_head);
-	sort_in_a(&a_head);
+	push_to_b(&a_head, &b_head, mark_head);
+	// printf ("%d\n", a_head->content);
+	sort_in_a(&a_head, mark_head);
 	sort_from_b_to_a(&a_head, &b_head, i);
 	last_swap(&a_head);
 	// printf ("a ");

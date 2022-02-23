@@ -21,7 +21,7 @@ void	last_swap(t_stack **a_head)
 	k = len(*a_head);
 	while (!how_is_it(*a_head))
 	{
-		if (i < k / 2)
+		if (i < k / 2 + 1)
 			swap(a_head, NULL, 6);
 		else
 			swap(a_head, NULL, 9);
@@ -108,13 +108,35 @@ void	mark_2(t_stack **a_head)
 	}
 }
 
+int	get_mark_head_place(t_stack *a_haed, t_stack *mark_head)
+{
+	int	i;
+
+	i = 0;
+	while (a_haed != mark_head)
+	{
+		i++;
+		a_haed = a_haed->next;
+	}
+	return (i);
+}
+
 void	mark(t_stack **a_head, t_stack **b_head, t_stack *mark_head)
 {
 	t_stack	*tmp;
 	t_stack	*head;
+	int		i;
 
+	i = 0;
+	if (get_mark_head_place(*a_head, mark_head) > len(*a_head) / 2 + 1)
+		i = 1;
 	while (*a_head != mark_head)
-		swap(a_head, NULL, 9);
+	{
+		if (i)
+			swap(a_head, NULL, 9);
+		else
+			swap(a_head, NULL, 6);
+	}
 	(*a_head)->true = 1;
 	tmp = *a_head;
 	*a_head = (*a_head)->next;
