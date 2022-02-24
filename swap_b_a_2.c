@@ -84,11 +84,11 @@ void	swap_b_a_2(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op)
 	if (op->oa == 1 && op->ob == 2)
 	{
 		i = check_1_2(op, 100000, *a_head, *b_head);
-		if (i)
+		if (op->o)
 		{
-			if (i == 3)
+			if (op->o == 3)
 				swap_i_3(a_head, b_head, first, min);
-			else if (i == 4)
+			else if (op->o == 4)
 				swap_i_4(a_head, b_head, first, min);
 		}
 		else

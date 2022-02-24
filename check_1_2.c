@@ -20,19 +20,16 @@ int	check_1_2_1(t_op *op, t_stack *a_head, t_stack *b_head, int j)
 	int	i;
 
 	i = 100000;
-	b = len(b_head) - op->b;
-	a = len(a_head) - op->a;
+	b = len(b_head) - op->b + 1;
+	a = len(a_head) - op->a + 1;
 	j = a;
 	if (j < b)
 		j = b;
 	k = op->b;
 	if (k < op->a)
 		k = op->a;
-	if (k < i)
-	{
-		op->o = 4;
-		i = k;
-	}
+	op->o = 4;
+	i = k;
 	if (j < i)
 	{
 		op->o = 3;
@@ -57,11 +54,8 @@ int	check_1_2_2(t_op *op, t_stack *a_head, t_stack *b_head, int j)
 	k = op->b;
 	if (k < op->a)
 		k = op->a;
-	if (k < i)
-	{
-		op->o = 4;
-		i = k;
-	}
+	op->o = 4;
+	i = k;
 	if (j < i)
 	{
 		op->o = 3;

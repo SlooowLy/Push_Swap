@@ -48,8 +48,7 @@ int	get_i_2(t_op *op, int lena, int lenb, int i)
 		k = op->b;
 		if (k < op->a)
 			k = op->a;
-		if (k < i)
-			i = k;
+		i = k;
 		if (j < i)
 			i = j;
 		if (i > (lena - op->a) + 1 + op->b)

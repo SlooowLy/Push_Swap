@@ -39,12 +39,11 @@ int	get_i_3(t_op *op, int lena, int lenb, int i)
 		k = op->b;
 		if (k < op->a)
 			k = op->a;
-		if (k < i)
-			i = k;
+		i = k;
 		if (j < i)
 			i = j;
-		if (i > ((lenb - op->b) + 1) + op->a)
-			i = ((lenb - op->b) + 1) + op->a;
+		if (i > (lenb - op->b) + op->a + 1)
+			i = (lenb - op->b) + op->a + 1;
 	}
 	return (i);
 }
@@ -63,9 +62,9 @@ int	op_number(t_op *op, int lena, int lenb)
 	i = get_i_3(op, lena, lenb, i);
 	if (op->oa == 2 && op->ob == 2)
 	{
-		if (op->a <= op->b)
+		if (op->a < op->b)
 			i = op->b;
-		if (op->a > op->b)
+		if (op->a >= op->b)
 			i = op->a;
 	}
 	return (i);
@@ -82,6 +81,8 @@ void	f_u_25_line(t_stack *a_head, t_stack *b_head, t_op *op, t_25_line_2 *t)
 	{
 		if (t->b < tmp->content && tmp->content == get_min(a_head))
 			break ;
+		if (t->b > tmp->content && tmp->content == get_max(a_head))
+			break;
 		if (tmp == a_head && check_first_last(a_head, t->b))
 			break ;
 		if (tmp != a_head)
@@ -95,6 +96,19 @@ void	f_u_25_line(t_stack *a_head, t_stack *b_head, t_op *op, t_25_line_2 *t)
 		op->a += 1;
 		tmp = tmp->next;
 	}
+}
+
+int	get_len(double	ln)
+{
+	int		i;
+	int		k;
+	double	j;
+
+	k = ln / 2;
+	j = ln / 2;
+	if (k != j)
+		return (ln / 2 + 1);
+	return (ln / 2);
 }
 
 t_stack	*whos_first(t_stack *a_head, t_stack *b_head, t_op *op, int min)
@@ -165,7 +179,7 @@ int	get_swap(t_stack *head, t_stack *tmp)
 		k++;
 		head = head->next;
 	}
-	if (k < i / 2 + 1)
+	if (k <= get_len(i))
 		return (1);
 	return (0);
 }
@@ -182,7 +196,7 @@ void	sort_in_a(t_stack **a_head, t_stack *mark_head)
 	tmp = *a_head;
 	*a_head = (*a_head)->next;
 	ln = len(tmp);
-	while (*a_head != mark_head && *a_head)
+	while (*a_head)
 	{
 		if ((*a_head)->content < tmp->content && (*a_head)->content != mark_head->content)
 		{
@@ -205,6 +219,27 @@ void	sort_in_a(t_stack **a_head, t_stack *mark_head)
 	*a_head = head;
 }
 
+void	check_double(t_stack **a_head)
+{
+	int		i;
+	t_stack	*tmp;
+	t_stack	*tmp2;
+
+	tmp = *a_head;
+	while (tmp)
+	{
+		i = tmp->content;
+		tmp2 = tmp->next;
+		while (tmp2)
+		{
+			if (tmp2->content == i)
+				ft_free(a_head, NULL);
+			tmp2 = tmp2->next;
+		}
+		tmp = tmp->next;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a_head;
@@ -213,16 +248,17 @@ int	main(int ac, char **av)
 	int		i;
 
 	creat(&a_head, &b_head, av, ac);
+	check_double(&a_head);
 	mark_head = get_mark_head(&a_head);
-	// printf ("%d\n", mark_head->content);
+	printf ("%d\n", mark_head->content);
 	mark(&a_head, &b_head, mark_head);
 	i = get_min(a_head);
 	push_to_b(&a_head, &b_head, mark_head);
 	// printf ("%d\n", a_head->content);
-	sort_in_a(&a_head, mark_head);
-	sort_from_b_to_a(&a_head, &b_head, i);
-	last_swap(&a_head);
-	// printf ("a ");
-	// print_the_stack(a_head);
+	// sort_in_a(&a_head, mark_head);
+	// sort_from_b_to_a(&a_head, &b_head, i);
+	// last_swap(&a_head);
+	printf ("a ");
+	print_the_stack(a_head);
 	return (0);
 }

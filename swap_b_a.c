@@ -45,11 +45,11 @@ void	swap_b_a_3(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op)
 	if (op->oa == 2 && op->ob == 1)
 	{
 		i = check_1_2(op, 10000, *a_head, *b_head);
-		if (i)
+		if (op->o)
 		{
-			if (i == 3)
+			if (op->o == 3)
 				swap_i_3_2(a_head, b_head, first, min);
-			else if (i == 4)
+			else if (op->o == 4)
 				swap_i_4_2(a_head, b_head, first, min);
 		}
 		else

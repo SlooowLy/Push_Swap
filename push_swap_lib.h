@@ -2,6 +2,7 @@
 # define PUSH_SWAP_LIB_H
 
 # include <stdio.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
 
@@ -45,6 +46,7 @@ int		checker_2(int swap, t_stack **a_head, t_stack **b_head);
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
 void	swap(t_stack **a_head, t_stack **b_head, int swap);
 void	ft_lstadd_front(t_stack **lst, t_stack *new);
+void	ft_free(t_stack **a_head, char **av);
 void	swap_5(t_stack **a_head, t_stack **b_head, int swap);
 void	swap_8(t_stack **a_head, t_stack **b_head, int swap);
 void	swap_4(t_stack **a_head, t_stack **b_head, int swap);
@@ -54,12 +56,12 @@ void	swap_6(t_stack **a_head, t_stack **b_head, int swap);
 void	swap_2(t_stack **a_head, t_stack **b_head, int swap);
 void	mark(t_stack **a_head, t_stack **b_head, t_stack *mark_head);
 t_stack	*get_mark_head(t_stack **a_head);
-int	get_i_1(t_op *op, int lena, int lenb, int i);
-int	how_is_it(t_stack *a_head);
-void	creat(t_stack **a_head, t_stack **b_head, char **av, int ac);
-void last_swap(t_stack **a_head);
-int	len(t_stack *head);
-int	get_i_2(t_op *op, int lena, int lenb, int i);
+int		get_i_1(t_op *op, int lena, int lenb, int i);
+int		how_is_it(t_stack *a_head);
+int		creat(t_stack **a_head, t_stack **b_head, char **av, int ac);
+void 	last_swap(t_stack **a_head);
+int		len(t_stack *head);
+int		get_i_2(t_op *op, int lena, int lenb, int i);
 int	check_first_last(t_stack *a_head, int b);
 int	get_min(t_stack	*a_head);
 void	push_to_b(t_stack **a_head, t_stack **b_head, t_stack *mark_head);
@@ -80,6 +82,7 @@ void	swap_b_a_1(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op);
 void	swap_i_3(t_stack **a_head, t_stack **b_head, t_stack *first, int min);
 void	swap_i_4(t_stack **a_head, t_stack **b_head, t_stack *first, int min);
 void	swap_b_a_2(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op);
-
+int	get_len(double	ln);
+char	**ft_split(char const *s, char c);
 
 # endif
