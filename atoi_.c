@@ -12,9 +12,9 @@
 
 #include "push_swap_lib.h"
 
-static int	ft_second(const char *a, int r, int i)
+long int	ft_second(const char *a, int r, int i)
 {
-	int	p;
+	long int	p;
 
 	p = 0;
 	while (i - r != 0)
@@ -37,7 +37,7 @@ static int	lenq(const char *s, int i)
 	return (j);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
 	int	i;
 	int	j;
@@ -55,12 +55,29 @@ int	ft_atoi(const char *str)
 		j = -1;
 		i++;
 	}
-	if (lenq (str, i) > 10 && j == 1)
-		return (0);
-	if (lenq (str, i) > 10 && j == -1)
-		return (-1);
 	r = i;
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	return (ft_second(str, r, i) * j);
+}
+
+int	how_is_it(t_stack *a_head)
+{
+	int		i;
+	t_stack	*the_next;
+
+	i = 0;
+	if (a_head != NULL)
+	{
+		while (a_head->next)
+		{
+			the_next = a_head->next;
+			if (the_next->content < a_head->content)
+				return (0);
+			a_head = the_next;
+		}
+	}
+	else
+		return (0);
+	return (1);
 }
