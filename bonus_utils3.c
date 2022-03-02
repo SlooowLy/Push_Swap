@@ -62,45 +62,51 @@ void	ft_free(t_stack **a_head, char **av)
 	exit (1);
 }
 
-int	creat(t_stack **a_head, t_stack **b_head, char **av, int ac)
+char	**first_creat(char **av, char **av2, t_stack **a_head)
 {
+	int	j;
+
+	av2 = ft_split(av[1], ' ');
+	if (!check_safety(av2[0]))
+		ft_free(a_head, av2);
+	j = ft_atoi(av2[0]);
+	if (j > 2147483647 || j < -2147483648)
+		ft_free(a_head, av2);
+	*a_head = ft_lstnew(j);
+	return (av2);
+}
+
+void	creat_25_line(t_stack **a_head, t_stack **b_head, char **av, int ac)
+{
+	char	**av2;
 	int		i;
 	int		k;
 	double	j;
-	char	**av2;
 
-	i = 1;
 	k = 1;
+	i = 1;
+	*b_head = NULL;
 	if (ac > 1)
 	{
-		*b_head = NULL;
-		if (ac > 1)
+		av2 = first_creat(av, av2, a_head);
+		while (av[i])
 		{
-			av2 = ft_split(av[i], ' ');
-			if (!check_safety(av2[0]))
-				ft_free(a_head, av2);
-			j = ft_atoi(av2[0]);
-			if (j > 2147483647 || j < -2147483648)
-				ft_free(a_head, av2);
-			*a_head = ft_lstnew(j);
-			while (av[i])
-			{
-				if (i != 1)
-					av2 = ft_split(av[i], ' ');
-				while (av2[k])
-				{
-					if (!check_safety(av2[k]))
-						ft_free(a_head, av2);
-					j = ft_atoi(av2[k]);
-					if (j > 2147483647 || j < -2147483648)
-						ft_free(a_head, av2);
-					ft_lstadd_back(a_head, ft_lstnew(j));
-					k++;
-				}
-				i++;
-				k = 0;
-			}
+			if (i != 1)
+				av2 = ft_split(av[i], ' ');
+			second_creat(av2, a_head, k);
+			i++;
+			k = 0;
 		}
+	}
+}
+
+int	creat(t_stack **a_head, t_stack **b_head, char **av, int ac)
+{
+	int		i;
+
+	if (ac > 1)
+	{
+		creat_25_line(a_head, b_head, av, ac);
 		return (1);
 	}
 	return (0);

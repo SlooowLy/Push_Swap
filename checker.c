@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitoual <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/02 15:50:20 by aaitoual          #+#    #+#             */
+/*   Updated: 2022/03/02 15:50:21 by aaitoual         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap_bonus_lib.h"
 
 int	ft_strncmp(const char *s1, const char *s2)
@@ -48,10 +60,10 @@ int	check_operations(char *op)
 int	main(int ac, char **av)
 {
 	t_stack	*a_head;
-	t_stack *b_head;
+	t_stack	*b_head;
 	char	*operations;
-	int	i;
-	int	op;
+	int		i;
+	int		op;
 
 	op = 0;
 	creat(&a_head, &b_head, av, ac);
@@ -62,18 +74,14 @@ int	main(int ac, char **av)
 		if (!i)
 		{
 			write (1, "Error\n", 6);
-			break;
+			break ;
 		}
 		swap(&a_head, &b_head, i, &op);
 		operations = get_next_line(0);
 	}
 	if (how_is_it(a_head))
-	{
 		write (1, "OK\n", 3);
-	}
 	else
-	{
 		write (1, "KO\n", 3);
-	}
 	return (0);
 }

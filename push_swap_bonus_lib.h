@@ -72,6 +72,12 @@ void	ft_lstadd_front(t_stack **lst, t_stack *new);
 long int	ft_atoi(const char *str);
 int		checker(int swap, t_stack **a_head, t_stack **b_head);
 char	**ft_split(char const *s, char c);
+int		check_safety(char *str);
+void	second_creat(char **av2, t_stack **a_head, int k);
+void	ft_free(t_stack **a_head, char **av);
+void	print_op(int swap, int *operations);
+void	print_op_2(int swap, int *operations);
+void	print_op_3(int swap, int *operations);
 
 
 # endif
