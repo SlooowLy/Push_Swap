@@ -38,6 +38,27 @@ void	print_op_2(int swap, int *operations)
 	print_op_3(swap, operations);
 }
 
+void	check_double(t_stack **a_head)
+{
+	int		i;
+	t_stack	*tmp;
+	t_stack	*tmp2;
+
+	tmp = *a_head;
+	while (tmp)
+	{
+		i = tmp->content;
+		tmp2 = tmp->next;
+		while (tmp2)
+		{
+			if (tmp2->content == i)
+				ft_free(a_head, NULL);
+			tmp2 = tmp2->next;
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	print_op_3(int swap, int *operations)
 {
 	if (swap == 2)

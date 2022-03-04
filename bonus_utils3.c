@@ -81,10 +81,11 @@ void	creat_25_line(t_stack **a_head, t_stack **b_head, char **av, int ac)
 	char	**av2;
 	int		i;
 	int		k;
-	double	j;
+	int		j;
 
 	k = 1;
 	i = 1;
+	j = 0;
 	*b_head = NULL;
 	if (ac > 1)
 	{
@@ -94,20 +95,28 @@ void	creat_25_line(t_stack **a_head, t_stack **b_head, char **av, int ac)
 			if (i != 1)
 				av2 = ft_split(av[i], ' ');
 			second_creat(av2, a_head, k);
+			while (av2[j])
+				free(av2[j++]);
+			free (av2);
 			i++;
 			k = 0;
+			j = 0;
 		}
 	}
 }
 
 int	creat(t_stack **a_head, t_stack **b_head, char **av, int ac)
 {
-	int		i;
+	// int		i;
 
 	if (ac > 1)
 	{
 		creat_25_line(a_head, b_head, av, ac);
 		return (1);
 	}
+	// i = 0;
+	// while (av[i])
+	// 	free(av[i++]);
+	// free(av);
 	return (0);
 }

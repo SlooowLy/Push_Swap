@@ -78,6 +78,6 @@ void	ft_free(t_stack **a_head, char **av);
 void	print_op(int swap, int *operations);
 void	print_op_2(int swap, int *operations);
 void	print_op_3(int swap, int *operations);
-
+void	check_double(t_stack **a_head);
 
 # endif

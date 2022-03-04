@@ -28,7 +28,7 @@ void	second_creat(char **av2, t_stack **a_head, int k)
 	}
 }
 
-void	swap_8(t_stack **a_head, t_stack **b_head, int swap, int *operations)
+void	swap_8(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -46,14 +46,14 @@ void	swap_8(t_stack **a_head, t_stack **b_head, int swap, int *operations)
 		}
 		else
 			*a_head = ft_lstnew((*b_head)->content);
-		if (*operations <= -1)
+		if (operations <= -1)
 			printf ("pa\n");
-		else if (*operations > -1)
-			(*operations)++;
+		else if (operations > -1)
+			(operations)++;
 	}
 }
 
-void	swap_3(t_stack **a_head, t_stack **b_head, int swap, int *operations)
+void	swap_3(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -81,7 +81,7 @@ void	swap_3(t_stack **a_head, t_stack **b_head, int swap, int *operations)
 	swap_4(a_head, b_head, swap, operations);
 }
 
-void	swap(t_stack **a_head, t_stack **b_head, int swap, int	*operations)
+void	swap(t_stack **a_head, t_stack **b_head, int swap, int	operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -95,38 +95,38 @@ void	swap(t_stack **a_head, t_stack **b_head, int swap, int	*operations)
 		tm->content = temp;
 		if (swap == 3)
 		{
-			if (*operations <= -1)
+			if (operations <= -1)
 				printf ("ss\n");
-			else if (*operations > -1)
-				(*operations)++;
+			else if (operations > -1)
+				operations++;
 		}
 		print_op(swap, operations);
 	}
 	swap_2(a_head, b_head, swap, operations);
 }
 
-void	print_op(int swap, int *operations)
+void	print_op(int swap, int operations)
 {
 	if (swap == 7)
 	{
-		if (*operations <= -1)
+		if (operations <= -1)
 			write (1, "rb\n", 3);
-		else if (*operations > -1)
-			(*operations)++;
+		else if (operations > -1)
+			(operations)++;
 	}
 	if (swap == 8)
 	{
-		if (*operations <= -1)
+		if (operations <= -1)
 			write (1, "rr\n", 3);
-		else if (*operations > -1)
-			(*operations)++;
+		else if (operations > -1)
+			(operations)++;
 	}
 	if (swap == 6)
 	{
-		if (*operations <= -1)
+		if (operations <= -1)
 			printf ("ra\n");
-		else if (*operations > -1)
-			(*operations)++;
+		else if (operations > -1)
+			(operations)++;
 	}
 	print_op_2(swap, operations);
 }

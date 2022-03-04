@@ -12,15 +12,15 @@
 
 #include "push_swap_lib.h"
 
-// void	print_the_stack(t_stack *stack)
-// {
-// 	printf ("%d ", stack->content);
-// 	while (stack->next)
-// 	{
-// 		stack = stack->next;
-// 		printf ("%d ", stack->content);
-// 	}
-// }
+void	print_the_stack(t_stack *stack)
+{
+	printf ("%d ", stack->content);
+	while (stack->next)
+	{
+		stack = stack->next;
+		printf ("%d ", stack->content);
+	}
+}
 
 int	f_u_25_line(t_stack *a_head, t_stack *b_head, t_op *op, t_25_line_2 *t)
 {
@@ -122,6 +122,32 @@ void	check_double(t_stack **a_head)
 	}
 }
 
+void	ft_done(t_stack **a, t_stack **b)
+{
+	t_stack *tmp;
+	int		i;
+
+	i = 0;
+	if (*a)
+	{
+		while (*a)
+		{
+			tmp = (*a)->next;
+			free (*a);
+			*a = tmp;
+		}
+	}
+	if (*b)
+	{
+		while (*b)
+		{
+			tmp = (*b)->next;
+			free (*b);
+			*b = tmp;
+		}
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a_head;
@@ -129,7 +155,7 @@ int	main(int ac, char **av)
 	int		i;
 
 	if (ac <= 1)
-		ft_free(NULL, NULL);
+		ft_free(NULL, &av);
 	creat(&a_head, &b_head, av, ac);
 	check_double(&a_head);
 	i = len(a_head);
@@ -138,6 +164,8 @@ int	main(int ac, char **av)
 	else if (i < 6)
 		second_algo(&a_head, &b_head, av, ac);
 	else
-		norm_function(av, ac, a_head, b_head);
+		norm_function(av, ac);
+	ft_done(&a_head, &b_head);
+	system("leaks push_swap");
 	return (0);
 }

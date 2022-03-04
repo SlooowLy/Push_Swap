@@ -85,7 +85,6 @@ void	swap_7(t_stack **a_head, t_stack **b_head, int swap, int *operations)
 
 void	swap_6(t_stack **a_head, t_stack **b_head, int swap, int *operations)
 {
-	int		temp;
 	t_stack	*tm;
 	t_stack	*tm2;
 

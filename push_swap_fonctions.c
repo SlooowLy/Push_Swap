@@ -61,7 +61,7 @@ int	checker(int swap, t_stack **a_head, t_stack **b_head)
 	return (checker_2(swap, a_head, b_head));
 }
 
-void	swap_7(t_stack **a_head, t_stack **b_head, int swap, int *operations)
+int	swap_7(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -80,23 +80,14 @@ void	swap_7(t_stack **a_head, t_stack **b_head, int swap, int *operations)
 		*b_head = tm;
 		tm2->next = NULL;
 		if (swap == 10)
-		{
-			if (*operations <= -1)
-				printf ("rrb\n");
-			else if (*operations > -1)
-			(*operations)++;
-		}
+			return (print_op(swap, operations));
 		if (swap == 11)
-		{
-			if (*operations <= -1)
-				printf ("rrr\n");
-			else if (*operations > -1)
-			(*operations)++;
-		}
+			return (print_op(swap, operations));
 	}
+	return (operations);
 }
 
-void	swap_6(t_stack **a_head, t_stack **b_head, int swap, int *operations)
+int	swap_6(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -115,17 +106,12 @@ void	swap_6(t_stack **a_head, t_stack **b_head, int swap, int *operations)
 		*a_head = tm;
 		tm2->next = NULL;
 		if (swap == 9)
-		{
-			if (*operations <= -1)
-				printf ("rra\n");
-			else if (*operations > -1)
-				(*operations)++;
-		}
+			return (print_op(swap, operations));
 	}
-	swap_7(a_head, b_head, swap, operations);
+	return (swap_7(a_head, b_head, swap, operations));
 }
 
-void	swap_2(t_stack **a_head, t_stack **b_head, int swap, int *operations)
+int	swap_2(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -139,12 +125,7 @@ void	swap_2(t_stack **a_head, t_stack **b_head, int swap, int *operations)
 		(*b_head)->content = tm->content;
 		tm->content = temp;
 		if (swap == 2)
-		{
-			if (*operations <= -1)
-				printf ("sb\n");
-			else if (*operations > -1)
-				(*operations)++;
-		}
+			return (print_op(swap, operations));
 	}
-	swap_3(a_head, b_head, swap, operations);
+	return (swap_3(a_head, b_head, swap, operations));
 }

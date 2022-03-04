@@ -67,15 +67,13 @@ int	main(int ac, char **av)
 
 	op = 0;
 	creat(&a_head, &b_head, av, ac);
+	check_double(&a_head);
 	operations = get_next_line(0);
 	while (operations != NULL)
 	{
 		i = check_operations(operations);
 		if (!i)
-		{
-			write (1, "Error\n", 6);
-			break ;
-		}
+			ft_free(&a_head, NULL);
 		swap(&a_head, &b_head, i, &op);
 		operations = get_next_line(0);
 	}
