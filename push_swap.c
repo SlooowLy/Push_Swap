@@ -12,17 +12,6 @@
 
 #include "push_swap_lib.h"
 
-void	print_the_stack(t_stack *stack)
-{
-	printf ("%d ", stack->content);
-	while (stack->next)
-	{
-		stack = stack->next;
-		printf ("%d ", stack->content);
-	}
-	printf ("\n");
-}
-
 int	f_u_25_line(t_stack *a_head, t_stack *b_head, t_op *op, t_25_line_2 *t)
 {
 	t_stack	*tmp;
@@ -111,21 +100,19 @@ int	main(int ac, char **av)
 	if (ac <= 1)
 		exit (1);
 	creat(&a_head, &b_head, av, ac);
+	if (!check_double(a_head))
+		ft_done_2(&a_head);
 	if (how_is_it(a_head))
 	{
 		ft_done(&a_head, &b_head);
 		exit (1);
 	}
-	if (!check_double(a_head))
-		ft_done_2(&a_head);
 	i = len(a_head);
 	if (i < 4)
 		therd_algo(&a_head, &b_head, av, ac);
 	else if (i < 6)
 		second_algo(&a_head, &b_head, av, ac);
 	else
-	{
 		norm_function(NULL, NULL, av, ac);
-	}
 	return (0);
 }

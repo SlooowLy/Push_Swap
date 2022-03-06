@@ -80,8 +80,11 @@ int	main(int ac, char **av)
 	int		op;
 
 	op = 0;
+	if (ac <= 1)
+		exit(1);
 	creat(&a_head, &b_head, av, ac);
-	check_double(a_head);
+	if (!check_double(a_head))
+		ft_done_2(&a_head);
 	operations = get_next_line(0);
 	while (operations != NULL)
 	{

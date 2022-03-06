@@ -36,16 +36,8 @@ int	check_double(t_stack *a_head)
 
 void	ft_free(t_stack **a_head, char ***av)
 {
-	int		i;
 	t_stack	*tmp;
 
-	i = -1;
-	if (*av)
-	{
-		while (*av[++i])
-			free(*av[i]);
-		free(*av);
-	}
 	if (*a_head)
 	{
 		while (*a_head)

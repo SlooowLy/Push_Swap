@@ -60,15 +60,6 @@ void	ft_free(t_stack **a_head, char ***av)
 	t_stack	*tmp;
 
 	i = 0;
-	if (*av)
-	{
-		while (*av[i])
-		{
-			free(*av[i]);
-			i++;
-		}
-		free(*av);
-	}
 	if (*a_head)
 	{
 		while (*a_head)
