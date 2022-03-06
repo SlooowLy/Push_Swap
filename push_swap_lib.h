@@ -66,7 +66,7 @@ t_stack	*get_mark_head(t_stack **a_head);
 int		get_i_1(t_op *op, int lena, int lenb, int i);
 int		how_is_it(t_stack *a_head);
 int		creat(t_stack **a_head, t_stack **b_head, char **av, int ac);
-void	last_swap(t_stack **a_head, int operations);
+int	last_swap(t_stack **a_head, int operations);
 int		len(t_stack *head);
 int		get_i_2(t_op *op, int lena, int lenb, int i);
 int	check_first_last(t_stack *a_head, int b);
@@ -89,10 +89,11 @@ void	second_creat(char **av2, t_stack **a_head, int k);
 char	**first_creat(char **av, char **av2, t_stack **a_head);
 void	second_algo(t_stack **a_head, t_stack **b_head, char **av, int ac);
 void	therd_algo(t_stack **a_head, t_stack **b_head, char **av, int ac);
-void	norm_function(char **av, int ac);
+void	norm_function(t_stack **a, t_stack **b, char **av, int ac);
 int	get_op_2(int lena, int lenb, t_op *op);
 void	get_default(t_25_line_2 *t, t_op *op, t_stack *a_head, t_stack *b_head);
 int		print_op(int swap, int operations);
 void	ft_done(t_stack **a, t_stack **b);
+void	print_the_stack(t_stack *stack);
 
 # endif

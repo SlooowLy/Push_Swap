@@ -12,16 +12,16 @@
 
 #include "push_swap_lib.h"
 
-int	firs_algo(t_stack *a_head, t_stack *b_head, char **av, int operations)
+int	firs_algo(t_stack **a_head, t_stack **b_head, char **av, int operations)
 {
 	t_stack	*mark_head;
 	int		i;
 
-	mark_head = get_mark_head(&a_head);
-	mark(&a_head, &b_head, mark_head);
-	operations = push_to_b(&a_head, &b_head, operations);
-	operations = sort_from_b_to_a(&a_head, &b_head, operations);
-	last_swap(&a_head, operations);
+	mark_head = get_mark_head(a_head);
+	mark(a_head, b_head, mark_head);
+	operations = push_to_b(a_head, b_head, operations);
+	operations = sort_from_b_to_a(a_head, b_head, operations);
+	operations = last_swap(a_head, operations);
 	return (operations);
 }
 
@@ -116,33 +116,35 @@ void	therd_algo(t_stack **a_head, t_stack **b_head, char **av, int ac)
 	// free (av);
 }
 
-void	norm_function(char **av, int ac)
+void	norm_function(t_stack **a_head, t_stack **b_head, char **av, int ac)
 {
 	int		i;
 	int		j;
 	t_stack	*a_tmp;
 	t_stack	*b_tmp;
-	t_stack *a_head;
-	t_stack *b_head;
+	t_stack	*a;
+	t_stack	*b;
 
-	creat(&a_head, &b_head, av, ac);
+	creat(&a, &b, av, ac);
 	creat(&a_tmp, &b_tmp, av, ac);
-	j = firs_algo(a_head, b_head, av, 0);
-	i = len(a_head);
-	if (i < 101)
-	{
-		if (j > 700)
-			i = firs_algo(a_tmp, b_tmp, av, -1);
-		else
-			i = firs_algo(a_tmp, b_tmp, av, -2);
-	}
-	else
-	{
-		if (j > 5500)
-			i = firs_algo(a_tmp, b_tmp, av, -1);
-		else
-			i = firs_algo(a_tmp, b_tmp, av, -2);
-	}
-	ft_done(&a_head, &b_head);
+	j = firs_algo(&a, &b, av, 0);
+	// i = len(a_tmp);
+	// if (i < 101)
+	// {
+	// 	if (j > 699)
+	// 		i = firs_algo(a_tmp, b_tmp, av, -1);
+	// 	else
+	// 		i = firs_algo(a_tmp, b_tmp, av, -2);
+	// }
+	// else
+	// {
+	// 	if (j > 5499)
+	// 		i = firs_algo(a_tmp, b_tmp, av, -1);
+	// 	else 
+	// 		i = firs_algo(a_tmp, b_tmp, av, -2);
+	// }
+	ft_done(&a, &b);
 	ft_done(&a_tmp, &b_tmp);
+	// ft_done(&a_tmp, &b_tmp);
+	// system("leaks push_swap");
 }

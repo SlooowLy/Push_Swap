@@ -101,13 +101,13 @@ int	how_is_it_2(t_stack *mark_head, t_stack *a_haed)
 	return (1);
 }
 
-void	check_double(t_stack **a_head)
+int	check_double(t_stack *a_head)
 {
 	int		i;
 	t_stack	*tmp;
 	t_stack	*tmp2;
 
-	tmp = *a_head;
+	tmp = a_head;
 	while (tmp)
 	{
 		i = tmp->content;
@@ -115,11 +115,12 @@ void	check_double(t_stack **a_head)
 		while (tmp2)
 		{
 			if (tmp2->content == i)
-				ft_free(a_head, NULL);
+				return (0);
 			tmp2 = tmp2->next;
 		}
 		tmp = tmp->next;
 	}
+	return (1);
 }
 
 void	ft_done(t_stack **a, t_stack **b)
@@ -155,17 +156,31 @@ int	main(int ac, char **av)
 	int		i;
 
 	if (ac <= 1)
-		ft_free(NULL, &av);
+		exit (1);
 	creat(&a_head, &b_head, av, ac);
-	check_double(&a_head);
+	if (how_is_it(a_head))
+	{
+		ft_done(&a_head, &b_head);
+		exit (1);
+	}
+	if (!check_double(a_head))
+	{
+		while (a_head)
+		{
+			b_head = a_head->next;
+			free(a_head);
+			a_head = b_head;
+		}
+		write (2, "Error\n", 6);
+		exit (1);
+	}
 	i = len(a_head);
 	if (i < 4)
 		therd_algo(&a_head, &b_head, av, ac);
 	else if (i < 6)
 		second_algo(&a_head, &b_head, av, ac);
 	else
-		norm_function(av, ac);
-	ft_done(&a_head, &b_head);
+		norm_function(&a_head, &b_head, av, ac);
 	system("leaks push_swap");
 	return (0);
 }

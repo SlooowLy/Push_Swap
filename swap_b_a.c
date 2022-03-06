@@ -81,7 +81,9 @@ int	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op)
 		}
 		else
 		{
+			op->operations = operations;
 			operations = swap_b_a_utils1(a_head, b_head, op, first);
+			op->operations = operations;
 			operations = swap_b_a_utils2(a_head, b_head, op, first);
 		}
 	}

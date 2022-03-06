@@ -62,7 +62,7 @@ int	get_op_utils2(int lena, int lenb, t_op *op, int i)
 	{
 		op->o = 3;
 		i = (lenb - op->b) + op->a + 1;
-	}
+	}		
 	return (i);
 }
 

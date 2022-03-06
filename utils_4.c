@@ -25,9 +25,10 @@ int	sort_from_b_to_a(t_stack **a_head, t_stack **b_head, int operations)
 		first = *b_head;
 		if ((*b_head)->next)
 			first = whos_first(*a_head, *b_head, &op, operations);
-		operations = swap_b_a(a_head, b_head, first, &op);
+		op.operations = swap_b_a(a_head, b_head, first, &op);
+		operations = op.operations;
 	}
-	return (operations);
+	return (op.operations);
 }
 
 int	get_min_place(t_stack *a_head)

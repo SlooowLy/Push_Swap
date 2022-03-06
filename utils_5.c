@@ -12,7 +12,7 @@
 
 #include "push_swap_lib.h"
 
-void	last_swap(t_stack **a_head, int operations)
+int	last_swap(t_stack **a_head, int operations)
 {
 	int	i;
 	int	k;
@@ -26,6 +26,7 @@ void	last_swap(t_stack **a_head, int operations)
 		else
 			operations = swap(a_head, NULL, 9, operations);
 	}
+	return (operations);
 }
 
 int	check_safety(char *str)

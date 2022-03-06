@@ -12,48 +12,30 @@
 
 #include "push_swap_lib.h"
 
-int	will_stay_25_line(t_stack *head, t_stack *temp, int first, int i)
-{
-	int	tmp;
-
-	tmp = temp->content;
-	temp = temp->next;
-	while (temp)
-	{
-		if (temp->content > tmp)
-		{
-			i++;
-			first = tmp;
-			tmp = temp->content;
-		}
-		else if (i && first < temp->content)
-		{
-			i++;
-			first = temp->content;
-		}
-		temp = temp->next;
-	}
-	return (i);
-}
-
 int	will_stay(t_stack *a_head, t_stack *head, int i, int tmp)
 {
 	t_stack	*temp;
 	double	first;
-	int		k;
 
-	k = 0;
 	first = 1000;
 	temp = head;
 	tmp = temp->content;
-	i = will_stay_25_line(head, temp, first, i);
+	temp = temp->next;
+	while (temp)
+	{
+		if (temp->content > tmp && ++i)
+		{
+			first = tmp;
+			tmp = temp->content;
+		}
+		else if (i && first < temp->content && ++i)
+			first = temp->content;
+		temp = temp->next;
+	}
 	while (head != a_head)
 	{
-		if (a_head->content > tmp)
-		{
-			i++;
+		if (a_head->content > tmp && ++i)
 			tmp = a_head->content;
-		}
 		a_head = a_head->next;
 	}
 	return (i);

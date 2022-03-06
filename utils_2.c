@@ -25,12 +25,19 @@ int	check_push_b(t_stack *a_head)
 
 int	push_to_b(t_stack **a_head, t_stack **b_head, int operations)
 {
-	while (check_push_b(*a_head))
+	int	i = 1;
+		// print_the_stack(*a_head);
+		// printf ("\nyoooo\n");
+	while (check_push_b(*a_head) && i)
 	{
 		if ((*a_head)->true == 0)
-			swap(a_head, b_head, 5, operations);
+			operations = swap(a_head, b_head, 5, operations);
 		else
-			swap(a_head, b_head, 6, operations);
+			operations = swap(a_head, b_head, 6, operations);
+		// print_the_stack(*a_head);
+		// printf ("\nyoooo\n");
+		// print_the_stack(*b_head);
+		// printf ("\nyoooo\n");
 	}
 	return (operations);
 }
