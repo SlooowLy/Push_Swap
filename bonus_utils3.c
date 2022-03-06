@@ -37,43 +37,20 @@ int	check_safety(char *str)
 	return (1);
 }
 
-void	ft_free(t_stack **a_head, char **av)
-{
-	int		i;
-	t_stack	*tmp;
-
-	i = -1;
-	if (av)
-	{
-		while (av[++i])
-			free(av[i]);
-		free(av);
-	}
-	if (*a_head)
-	{
-		while (*a_head)
-		{
-			tmp = (*a_head)->next;
-			free (*a_head);
-			*a_head = tmp;
-		}
-	}
-	write (2, "Error\n", 6);
-	exit (1);
-}
-
-char	**first_creat(char **av, char **av2, t_stack **a_head)
+void	second_creat(char **av2, t_stack **a_head, int k)
 {
 	int	j;
 
-	av2 = ft_split(av[1], ' ');
-	if (!check_safety(av2[0]))
-		ft_free(a_head, av2);
-	j = ft_atoi(av2[0]);
-	if (j > 2147483647 || j < -2147483648)
-		ft_free(a_head, av2);
-	*a_head = ft_lstnew(j);
-	return (av2);
+	while (av2[k])
+	{
+		if (!check_safety(av2[k]))
+			ft_free(a_head, &av2);
+		j = ft_atoi(av2[k]);
+		if (j > 2147483647 || j < -2147483648)
+			ft_free(a_head, &av2);
+		ft_lstadd_back(a_head, ft_lstnew(j));
+		k++;
+	}
 }
 
 void	creat_25_line(t_stack **a_head, t_stack **b_head, char **av, int ac)
@@ -107,8 +84,6 @@ void	creat_25_line(t_stack **a_head, t_stack **b_head, char **av, int ac)
 
 int	creat(t_stack **a_head, t_stack **b_head, char **av, int ac)
 {
-	// int		i;
-
 	if (ac > 1)
 	{
 		creat_25_line(a_head, b_head, av, ac);

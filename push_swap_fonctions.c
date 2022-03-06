@@ -79,12 +79,9 @@ int	swap_7(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		tm->next = *b_head;
 		*b_head = tm;
 		tm2->next = NULL;
-		if (swap == 10)
-			return (print_op(swap, operations));
-		if (swap == 11)
-			return (print_op(swap, operations));
+		operations = print_op(swap, operations);
 	}
-	return (operations);
+	return (swap_8(a_head, b_head, swap, operations));
 }
 
 int	swap_6(t_stack **a_head, t_stack **b_head, int swap, int operations)
@@ -106,7 +103,7 @@ int	swap_6(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		*a_head = tm;
 		tm2->next = NULL;
 		if (swap == 9)
-			return (print_op(swap, operations));
+			operations = print_op(swap, operations);
 	}
 	return (swap_7(a_head, b_head, swap, operations));
 }
@@ -125,7 +122,7 @@ int	swap_2(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		(*b_head)->content = tm->content;
 		tm->content = temp;
 		if (swap == 2)
-			return (print_op(swap, operations));
+			operations = print_op(swap, operations);
 	}
 	return (swap_3(a_head, b_head, swap, operations));
 }

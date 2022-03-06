@@ -108,43 +108,33 @@ void	therd_algo(t_stack **a_head, t_stack **b_head, char **av, int ac)
 		}
 	}
 	i = 0;
-	// while (av[i])
-	// {
-	// 	free (av[i]);
-	// 	i++;
-	// }
-	// free (av);
 }
 
-void	norm_function(t_stack **a_head, t_stack **b_head, char **av, int ac)
+void	norm_function(t_stack *a, t_stack *b, char **av, int ac)
 {
 	int		i;
 	int		j;
 	t_stack	*a_tmp;
 	t_stack	*b_tmp;
-	t_stack	*a;
-	t_stack	*b;
 
 	creat(&a, &b, av, ac);
 	creat(&a_tmp, &b_tmp, av, ac);
 	j = firs_algo(&a, &b, av, 0);
-	// i = len(a_tmp);
-	// if (i < 101)
-	// {
-	// 	if (j > 699)
-	// 		i = firs_algo(a_tmp, b_tmp, av, -1);
-	// 	else
-	// 		i = firs_algo(a_tmp, b_tmp, av, -2);
-	// }
-	// else
-	// {
-	// 	if (j > 5499)
-	// 		i = firs_algo(a_tmp, b_tmp, av, -1);
-	// 	else 
-	// 		i = firs_algo(a_tmp, b_tmp, av, -2);
-	// }
+	i = len(a_tmp);
+	if (i < 101)
+	{
+		if (j > 699)
+			i = firs_algo(&a_tmp, &b_tmp, av, -1);
+		else
+			i = firs_algo(&a_tmp, &b_tmp, av, -2);
+	}
+	else
+	{
+		if (j > 5499)
+			i = firs_algo(&a_tmp, &b_tmp, av, -1);
+		else
+			i = firs_algo(&a_tmp, &b_tmp, av, -2);
+	}
 	ft_done(&a, &b);
 	ft_done(&a_tmp, &b_tmp);
-	// ft_done(&a_tmp, &b_tmp);
-	// system("leaks push_swap");
 }

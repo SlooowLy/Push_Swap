@@ -51,10 +51,6 @@ int	creat(t_stack **a_head, t_stack **b_head, char **av, int ac)
 		return (1);
 	}
 	i = 0;
-	// while (av[i])
-	// 	free(av[i++]);
-	// free (av);
-	// system("leaks push_swap");
 	return (0);
 }
 

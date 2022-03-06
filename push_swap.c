@@ -20,6 +20,7 @@ void	print_the_stack(t_stack *stack)
 		stack = stack->next;
 		printf ("%d ", stack->content);
 	}
+	printf ("\n");
 }
 
 int	f_u_25_line(t_stack *a_head, t_stack *b_head, t_op *op, t_25_line_2 *t)
@@ -101,54 +102,6 @@ int	how_is_it_2(t_stack *mark_head, t_stack *a_haed)
 	return (1);
 }
 
-int	check_double(t_stack *a_head)
-{
-	int		i;
-	t_stack	*tmp;
-	t_stack	*tmp2;
-
-	tmp = a_head;
-	while (tmp)
-	{
-		i = tmp->content;
-		tmp2 = tmp->next;
-		while (tmp2)
-		{
-			if (tmp2->content == i)
-				return (0);
-			tmp2 = tmp2->next;
-		}
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
-void	ft_done(t_stack **a, t_stack **b)
-{
-	t_stack *tmp;
-	int		i;
-
-	i = 0;
-	if (*a)
-	{
-		while (*a)
-		{
-			tmp = (*a)->next;
-			free (*a);
-			*a = tmp;
-		}
-	}
-	if (*b)
-	{
-		while (*b)
-		{
-			tmp = (*b)->next;
-			free (*b);
-			*b = tmp;
-		}
-	}
-}
-
 int	main(int ac, char **av)
 {
 	t_stack	*a_head;
@@ -164,23 +117,15 @@ int	main(int ac, char **av)
 		exit (1);
 	}
 	if (!check_double(a_head))
-	{
-		while (a_head)
-		{
-			b_head = a_head->next;
-			free(a_head);
-			a_head = b_head;
-		}
-		write (2, "Error\n", 6);
-		exit (1);
-	}
+		ft_done_2(&a_head);
 	i = len(a_head);
 	if (i < 4)
 		therd_algo(&a_head, &b_head, av, ac);
 	else if (i < 6)
 		second_algo(&a_head, &b_head, av, ac);
 	else
-		norm_function(&a_head, &b_head, av, ac);
-	system("leaks push_swap");
+	{
+		norm_function(NULL, NULL, av, ac);
+	}
 	return (0);
 }

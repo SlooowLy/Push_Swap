@@ -12,20 +12,23 @@
 
 #include "push_swap_bonus_lib.h"
 
-void	second_creat(char **av2, t_stack **a_head, int k)
+void	swap_5(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
-	int	j;
+	int		temp;
+	t_stack	*tm;
+	t_stack	*tm2;
 
-	while (av2[k])
+	if (checker(swap, a_head, b_head) && (swap == 7 || swap == 8))
 	{
-		if (!check_safety(av2[k]))
-			ft_free(a_head, av2);
-		j = ft_atoi(av2[k]);
-		if (j > 2147483647 || j < -2147483648)
-			ft_free(a_head, av2);
-		ft_lstadd_back(a_head, ft_lstnew(j));
-		k++;
+		tm = *b_head;
+		while (tm->next)
+			tm = tm->next;
+		tm->next = *b_head;
+		tm2 = (*b_head)->next;
+		(*b_head)->next = NULL;
+		*b_head = tm2;
 	}
+	swap_6(a_head, b_head, swap, operations);
 }
 
 void	swap_8(t_stack **a_head, t_stack **b_head, int swap, int operations)
@@ -46,10 +49,6 @@ void	swap_8(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		}
 		else
 			*a_head = ft_lstnew((*b_head)->content);
-		if (operations <= -1)
-			printf ("pa\n");
-		else if (operations > -1)
-			(operations)++;
 	}
 }
 
@@ -57,31 +56,55 @@ void	swap_3(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
+	t_stack	*tm2;
 
 	if (checker(swap, a_head, b_head) && (swap == 5))
 	{
 		if (*b_head)
 		{
-			tm = *a_head;
-			ft_lstadd_front(b_head, ft_lstnew(tm->content));
-			tm = tm->next;
+			temp = (*a_head)->content;
+			tm = (*a_head)->next;
+			ft_lstadd_front(b_head, ft_lstnew((*a_head)->content));
 			free (*a_head);
 			*a_head = tm;
 		}
 		else
 		{
-			*b_head = ft_lstnew((*a_head)->content);
-			tm = *a_head;
-			tm = tm->next;
+			temp = (*a_head)->content;
+			tm = (*a_head)->next;
+			*b_head = ft_lstnew(temp);
 			free (*a_head);
 			*a_head = tm;
 		}
-		print_op(swap, operations);
 	}
 	swap_4(a_head, b_head, swap, operations);
 }
 
-void	swap(t_stack **a_head, t_stack **b_head, int swap, int	operations)
+void	swap_4(t_stack **a_head, t_stack **b_head, int swap, int operations)
+{
+	int		temp;
+	int		tue;
+	t_stack	*tm;
+	t_stack	*tm2;
+
+	tm = NULL;
+	tm2 = NULL;
+	if (checker(swap, a_head, b_head) && (swap == 6 || swap == 8))
+	{
+		tm = (*a_head)->next;
+		tue = (*a_head)->true;
+		ft_lstadd_back(a_head, ft_lstnew((*a_head)->content));
+		free (*a_head);
+		while ((*a_head)->next)
+			*a_head = (*a_head)->next;
+		(*a_head)->true = tue;
+		*a_head = tm;
+	}
+	swap_8(a_head, b_head, swap, operations);
+	swap_5(a_head, b_head, swap, operations);
+}
+
+void	swap(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -93,40 +116,6 @@ void	swap(t_stack **a_head, t_stack **b_head, int swap, int	operations)
 		tm = tm->next;
 		(*a_head)->content = tm->content;
 		tm->content = temp;
-		if (swap == 3)
-		{
-			if (operations <= -1)
-				printf ("ss\n");
-			else if (operations > -1)
-				operations++;
-		}
-		print_op(swap, operations);
 	}
 	swap_2(a_head, b_head, swap, operations);
-}
-
-void	print_op(int swap, int operations)
-{
-	if (swap == 7)
-	{
-		if (operations <= -1)
-			write (1, "rb\n", 3);
-		else if (operations > -1)
-			(operations)++;
-	}
-	if (swap == 8)
-	{
-		if (operations <= -1)
-			write (1, "rr\n", 3);
-		else if (operations > -1)
-			(operations)++;
-	}
-	if (swap == 6)
-	{
-		if (operations <= -1)
-			printf ("ra\n");
-		else if (operations > -1)
-			(operations)++;
-	}
-	print_op_2(swap, operations);
 }

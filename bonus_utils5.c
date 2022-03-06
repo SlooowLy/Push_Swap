@@ -12,115 +12,111 @@
 
 #include "push_swap_bonus_lib.h"
 
-void	print_op_2(int swap, int *operations)
+int	checker_2(int swap, t_stack **a_head, t_stack **b_head)
 {
-	if (swap == 10)
+	if (swap == 3 && *a_head && *b_head)
 	{
-		if (*operations <= -1)
-			printf ("rrb\n");
-		else if (*operations > -1)
-		(*operations)++;
+		if ((*a_head)->next && (*b_head)->next)
+			return (1);
+		return (0);
 	}
-	if (swap == 11)
+	if (swap == 4 || swap == 7 || swap == 10)
 	{
-		if (*operations <= -1)
-			printf ("rrr\n");
-		else if (*operations > -1)
-		(*operations)++;
+		if (*b_head)
+			return (1);
+		return (0);
 	}
-	if (swap == 9)
+	if (swap == 5 || swap == 6 || swap == 9)
 	{
-		if (*operations <= -1)
-			printf ("rra\n");
-		else if (*operations > -1)
-			(*operations)++;
+		if (*a_head)
+			return (1);
+		return (0);
 	}
-	print_op_3(swap, operations);
+	if (swap == 8 || swap == 11)
+	{
+		if (*a_head && *b_head)
+			return (1);
+		return (0);
+	}
+	return (0);
 }
 
-void	check_double(t_stack **a_head)
+int	checker(int swap, t_stack **a_head, t_stack **b_head)
 {
-	int		i;
-	t_stack	*tmp;
-	t_stack	*tmp2;
+	int	i;
 
-	tmp = *a_head;
-	while (tmp)
+	i = 0;
+	if (swap == 1 && *a_head)
 	{
-		i = tmp->content;
-		tmp2 = tmp->next;
-		while (tmp2)
-		{
-			if (tmp2->content == i)
-				ft_free(a_head, NULL);
-			tmp2 = tmp2->next;
-		}
-		tmp = tmp->next;
+		if ((*a_head)->next)
+			return (1);
+		return (0);
 	}
+	if (swap == 2 && *b_head)
+	{
+		if ((*b_head)->next)
+			return (1);
+		return (0);
+	}
+	return (checker_2(swap, a_head, b_head));
 }
 
-void	print_op_3(int swap, int *operations)
-{
-	if (swap == 2)
-	{
-		if (*operations <= -1)
-			printf ("sb\n");
-		else if (*operations > -1)
-			(*operations)++;
-	}
-	if (swap == 5)
-	{
-		if (*operations <= -1)
-			printf ("pb\n");
-		else if (*operations > -1)
-			(*operations)++;
-	}
-	if (swap == 1)
-	{
-		if (*operations <= -1)
-			printf ("sa\n");
-		else if (*operations > -1)
-		(*operations)++;
-	}
-}
-
-void	swap_4(t_stack **a_head, t_stack **b_head, int swap, int *operations)
+void	swap_7(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
 	t_stack	*tm2;
 
-	if (checker(swap, a_head, b_head) && (swap == 6 || swap == 8))
-	{
-		tm = *a_head;
-		while (tm->next)
-			tm = tm->next;
-		tm->next = *a_head;
-		tm2 = (*a_head)->next;
-		(*a_head)->next = NULL;
-		*a_head = tm2;
-		print_op(swap, operations);
-	}
-	swap_8(a_head, b_head, swap, operations);
-	swap_5(a_head, b_head, swap, operations);
-}
-
-void	swap_5(t_stack **a_head, t_stack **b_head, int swap, int *operations)
-{
-	int		temp;
-	t_stack	*tm;
-	t_stack	*tm2;
-
-	if (checker(swap, a_head, b_head) && (swap == 7 || swap == 8))
+	if (checker(swap, a_head, b_head) && (swap == 10 || swap == 11))
 	{
 		tm = *b_head;
+		tm2 = *b_head;
 		while (tm->next)
+		{
+			tm2 = tm;
 			tm = tm->next;
+		}
 		tm->next = *b_head;
-		tm2 = (*b_head)->next;
-		(*b_head)->next = NULL;
-		*b_head = tm2;
-		print_op(swap, operations);
+		*b_head = tm;
+		tm2->next = NULL;
 	}
-	swap_6(a_head, b_head, swap, operations);
+}
+
+void	swap_6(t_stack **a_head, t_stack **b_head, int swap, int operations)
+{
+	int		temp;
+	t_stack	*tm;
+	t_stack	*tm2;
+
+	if (checker(swap, a_head, b_head) && (swap == 9 || swap == 11))
+	{
+		tm = *a_head;
+		tm2 = *a_head;
+		while (tm->next)
+		{
+			tm2 = tm;
+			tm = tm->next;
+		}
+		tm->next = *a_head;
+		*a_head = tm;
+		tm2->next = NULL;
+	}
+	swap_7(a_head, b_head, swap, operations);
+}
+
+void	swap_2(t_stack **a_head, t_stack **b_head, int swap, int operations)
+{
+	int		temp;
+	t_stack	*tm;
+	t_stack	*tm2;
+
+	if (checker(swap, a_head, b_head) && (swap == 2 || swap == 3))
+	{
+		tm = *b_head;
+		temp = tm->content;
+		tm = tm->next;
+		(*b_head)->content = tm->content;
+		tm->content = temp;
+	}
+	swap_3(a_head, b_head, swap, operations);
 }

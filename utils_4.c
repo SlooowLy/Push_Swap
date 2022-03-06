@@ -19,14 +19,14 @@ int	sort_from_b_to_a(t_stack **a_head, t_stack **b_head, int operations)
 	t_stack	*first;
 
 	i = 0;
+	op.o = 0;
 	op.operations = operations;
 	while (*b_head)
 	{
 		first = *b_head;
 		if ((*b_head)->next)
-			first = whos_first(*a_head, *b_head, &op, operations);
+			first = whos_first(*a_head, *b_head, &op, op.operations);
 		op.operations = swap_b_a(a_head, b_head, first, &op);
-		operations = op.operations;
 	}
 	return (op.operations);
 }

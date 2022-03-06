@@ -56,6 +56,17 @@ int	swap_b_a_utils2(t_stack **a_head,
 		while (!check_b_a(*a_head, *b_head, first, min))
 			operations = swap (a_head, b_head, 10, operations);
 	}
+	if (op->o == 1)
+	{
+		while (!check_b(*b_head, first) && !check_a(*a_head, first, min))
+			operations = swap (a_head, b_head, 8, operations);
+		if (!check_a(*a_head, first, min))
+			while (!check_b_a(*a_head, *b_head, first, min))
+				operations = swap (a_head, b_head, 6, operations);
+		else
+			while (!check_b_a(*a_head, *b_head, first, min))
+				operations = swap (a_head, b_head, 7, operations);
+	}
 	return (operations);
 }
 
@@ -68,24 +79,10 @@ int	swap_b_a(t_stack **a_head, t_stack **b_head, t_stack *first, t_op *op)
 	operations = op->operations;
 	if (!check_b_a(*a_head, *b_head, first, min))
 	{
-		if (op->o == 1)
-		{
-			while (!check_b(*b_head, first) && !check_a(*a_head, first, min))
-				operations = swap (a_head, b_head, 8, operations);
-			if (!check_a(*a_head, first, min))
-				while (!check_b_a(*a_head, *b_head, first, min))
-					operations = swap (a_head, b_head, 6, operations);
-			else
-				while (!check_b_a(*a_head, *b_head, first, min))
-					operations = swap (a_head, b_head, 7, operations);
-		}
-		else
-		{
-			op->operations = operations;
-			operations = swap_b_a_utils1(a_head, b_head, op, first);
-			op->operations = operations;
-			operations = swap_b_a_utils2(a_head, b_head, op, first);
-		}
+		op->operations = operations;
+		operations = swap_b_a_utils1(a_head, b_head, op, first);
+		op->operations = operations;
+		operations = swap_b_a_utils2(a_head, b_head, op, first);
 	}
 	operations = swap (a_head, b_head, 4, operations);
 	return (operations);

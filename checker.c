@@ -57,6 +57,20 @@ int	check_operations(char *op)
 	return (0);
 }
 
+void	ft_done_2(t_stack **h)
+{
+	t_stack	*tmp;
+
+	while (*h)
+	{
+		tmp = (*h)->next;
+		free (*h);
+		*h = tmp;
+	}
+	write (2, "Error\n", 6);
+	exit (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a_head;
@@ -67,14 +81,14 @@ int	main(int ac, char **av)
 
 	op = 0;
 	creat(&a_head, &b_head, av, ac);
-	check_double(&a_head);
+	check_double(a_head);
 	operations = get_next_line(0);
 	while (operations != NULL)
 	{
 		i = check_operations(operations);
 		if (!i)
-			ft_free(&a_head, NULL);
-		swap(&a_head, &b_head, i, &op);
+			ft_done_2(&a_head);
+		swap(&a_head, &b_head, i, op);
 		operations = get_next_line(0);
 	}
 	if (how_is_it(a_head))
