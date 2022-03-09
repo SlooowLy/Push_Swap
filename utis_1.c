@@ -21,22 +21,22 @@ void	creat_25_line(t_stack **a_head, t_stack **b_head, char **av, int ac)
 
 	k = 1;
 	i = 1;
-	j = 0;
 	*b_head = NULL;
 	if (ac > 1)
 	{
 		av2 = first_creat(av, av2, a_head);
 		while (av[i])
 		{
+			j = 0;
 			if (i != 1)
 				av2 = ft_split(av[i], ' ');
 			second_creat(av2, a_head, k);
 			while (av2[j])
 				free(av2[j++]);
 			free (av2);
+			av2 = NULL;
 			i++;
 			k = 0;
-			j = 0;
 		}
 	}
 }

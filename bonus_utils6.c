@@ -53,7 +53,7 @@ void	ft_free(t_stack **a_head, char ***av)
 
 char	**first_creat(char **av, char **av2, t_stack **a_head)
 {
-	int	j;
+	int long	j;
 
 	av2 = ft_split(av[1], ' ');
 	if (!check_safety(av2[0]))
@@ -63,4 +63,29 @@ char	**first_creat(char **av, char **av2, t_stack **a_head)
 		ft_free(a_head, &av2);
 	*a_head = ft_lstnew(j);
 	return (av2);
+}
+
+void	check_split(char const *s)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	if (!s[0])
+	{
+		write (2, "ERROR\n", 6);
+		exit (1);
+	}
+	while (s[i])
+	{
+		if (s[i] == ' ')
+			k++;
+		i++;
+	}
+	if (k == i)
+	{
+		write (2, "ERROR\n", 6);
+		exit (1);
+	}
 }

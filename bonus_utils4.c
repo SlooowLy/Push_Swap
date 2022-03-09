@@ -12,7 +12,7 @@
 
 #include "push_swap_bonus_lib.h"
 
-void	swap_5(t_stack **a_head, t_stack **b_head, int swap, int operations)
+int	swap_5(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -28,10 +28,10 @@ void	swap_5(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		(*b_head)->next = NULL;
 		*b_head = tm2;
 	}
-	swap_6(a_head, b_head, swap, operations);
+	return (swap_6(a_head, b_head, swap, operations));
 }
 
-void	swap_8(t_stack **a_head, t_stack **b_head, int swap, int operations)
+int	swap_8(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -50,9 +50,10 @@ void	swap_8(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		else
 			*a_head = ft_lstnew((*b_head)->content);
 	}
+	return (operations);
 }
 
-void	swap_3(t_stack **a_head, t_stack **b_head, int swap, int operations)
+int	swap_3(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -77,10 +78,10 @@ void	swap_3(t_stack **a_head, t_stack **b_head, int swap, int operations)
 			*a_head = tm;
 		}
 	}
-	swap_4(a_head, b_head, swap, operations);
+	return (swap_4(a_head, b_head, swap, operations));
 }
 
-void	swap_4(t_stack **a_head, t_stack **b_head, int swap, int operations)
+int	swap_4(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	int		tue;
@@ -100,11 +101,10 @@ void	swap_4(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		(*a_head)->true = tue;
 		*a_head = tm;
 	}
-	swap_8(a_head, b_head, swap, operations);
-	swap_5(a_head, b_head, swap, operations);
+	return (swap_5(a_head, b_head, swap, operations));
 }
 
-void	swap(t_stack **a_head, t_stack **b_head, int swap, int operations)
+int	swap(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -117,5 +117,5 @@ void	swap(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		(*a_head)->content = tm->content;
 		tm->content = temp;
 	}
-	swap_2(a_head, b_head, swap, operations);
+	return (swap_2(a_head, b_head, swap, operations));
 }

@@ -60,7 +60,7 @@ int	check_double(t_stack *a_head)
 	return (1);
 }
 
-void	ft_done_2(t_stack **h)
+void	ft_done_2(t_stack **h, int i)
 {
 	t_stack	*tmp;
 
@@ -70,6 +70,9 @@ void	ft_done_2(t_stack **h)
 		free (*h);
 		*h = tmp;
 	}
-	write (2, "Error\n", 6);
-	exit (1);
+	if (i == 1)
+	{
+		write (2, "Error\n", 6);
+		exit (1);
+	}
 }

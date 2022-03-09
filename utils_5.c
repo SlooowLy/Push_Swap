@@ -75,7 +75,7 @@ void	ft_free(t_stack **a_head, char ***av)
 
 void	second_creat(char **av2, t_stack **a_head, int k)
 {
-	int	j;
+	long int	j;
 
 	while (av2[k])
 	{
@@ -91,7 +91,7 @@ void	second_creat(char **av2, t_stack **a_head, int k)
 
 char	**first_creat(char **av, char **av2, t_stack **a_head)
 {
-	int	j;
+	long int	j;
 
 	av2 = ft_split(av[1], ' ');
 	if (!check_safety(av2[0]))

@@ -107,7 +107,8 @@ void		get_default(t_25_line_2 *t, t_op *op, t_stack *a, t_stack *b);
 int			print_op(int swap, int operations);
 void		ft_done(t_stack **a, t_stack **b);
 void		ft_done(t_stack **a, t_stack **b);
-void		ft_done_2(t_stack **h);
+void		ft_done_2(t_stack **h, int i);
 int			check_double(t_stack *a_head);
+void		check_split(char const *s);
 
 #endif

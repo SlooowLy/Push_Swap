@@ -12,6 +12,14 @@
 
 #include "push_swap_bonus_lib.h"
 
+void	print_resault(t_stack *a_head)
+{
+	if (how_is_it(a_head))
+		write (1, "OK\n", 3);
+	else
+		write (1, "KO\n", 3);
+}
+
 long int	ft_second(const char *a, int r, int i)
 {
 	long int	p;

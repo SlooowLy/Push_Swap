@@ -98,14 +98,14 @@ int	main(int ac, char **av)
 	int		i;
 
 	if (ac <= 1)
-		exit (1);
+		ft_done_2(&a_head, 0);
 	creat(&a_head, &b_head, av, ac);
 	if (!check_double(a_head))
-		ft_done_2(&a_head);
+		ft_done_2(&a_head, 1);
 	if (how_is_it(a_head))
 	{
 		ft_done(&a_head, &b_head);
-		exit (1);
+		exit (0);
 	}
 	i = len(a_head);
 	if (i < 4)
@@ -114,5 +114,6 @@ int	main(int ac, char **av)
 		second_algo(&a_head, &b_head, av, ac);
 	else
 		norm_function(NULL, NULL, av, ac);
+	ft_done_2(&a_head, 0);
 	return (0);
 }

@@ -39,7 +39,7 @@ int	check_safety(char *str)
 
 void	second_creat(char **av2, t_stack **a_head, int k)
 {
-	int	j;
+	long int	j;
 
 	while (av2[k])
 	{

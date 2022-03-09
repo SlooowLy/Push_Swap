@@ -45,3 +45,28 @@ int	get_min_place(t_stack *a_head)
 	}
 	return (i);
 }
+
+void	check_split(char const *s)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	if (!s[0])
+	{
+		write (2, "ERROR\n", 6);
+		exit (1);
+	}
+	while (s[i])
+	{
+		if (s[i] == ' ')
+			k++;
+		i++;
+	}
+	if (k == i)
+	{
+		write (2, "ERROR\n", 6);
+		exit (1);
+	}
+}

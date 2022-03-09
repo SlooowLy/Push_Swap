@@ -61,7 +61,7 @@ int	checker(int swap, t_stack **a_head, t_stack **b_head)
 	return (checker_2(swap, a_head, b_head));
 }
 
-void	swap_7(t_stack **a_head, t_stack **b_head, int swap, int operations)
+int	swap_7(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -80,9 +80,10 @@ void	swap_7(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		*b_head = tm;
 		tm2->next = NULL;
 	}
+	return (swap_8(a_head, b_head, swap, operations));
 }
 
-void	swap_6(t_stack **a_head, t_stack **b_head, int swap, int operations)
+int	swap_6(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -101,10 +102,10 @@ void	swap_6(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		*a_head = tm;
 		tm2->next = NULL;
 	}
-	swap_7(a_head, b_head, swap, operations);
+	return (swap_7(a_head, b_head, swap, operations));
 }
 
-void	swap_2(t_stack **a_head, t_stack **b_head, int swap, int operations)
+int	swap_2(t_stack **a_head, t_stack **b_head, int swap, int operations)
 {
 	int		temp;
 	t_stack	*tm;
@@ -118,5 +119,5 @@ void	swap_2(t_stack **a_head, t_stack **b_head, int swap, int operations)
 		(*b_head)->content = tm->content;
 		tm->content = temp;
 	}
-	swap_3(a_head, b_head, swap, operations);
+	return (swap_3(a_head, b_head, swap, operations));
 }
