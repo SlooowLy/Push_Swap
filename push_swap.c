@@ -98,7 +98,7 @@ int	main(int ac, char **av)
 	int		i;
 
 	if (ac <= 1)
-		ft_done_2(&a_head, 0);
+		ft_done_2(&a_head, 1);
 	creat(&a_head, &b_head, av, ac);
 	if (!check_double(a_head))
 		ft_done_2(&a_head, 1);
